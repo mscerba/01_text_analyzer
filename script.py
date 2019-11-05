@@ -47,7 +47,7 @@ words_number = 0
 
 # P1 Pozdrav uzivatele
 oddelovac()
-print("Vítáme Tě v naši aplikaci. Zadej přihlašovací údaje.")
+print("Vítáme Tě v naši aplikaci, zadej přihlašovací údaje.")
 
 
 # P2 Pozadejte uzivatele o zadani uzivatelskeho hesla a jmena
@@ -142,3 +142,5 @@ for word in text_modified:
 
 
 print("Součet všech čísel v textu je: {}".format(suma_number_text))
+
+
