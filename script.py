@@ -105,6 +105,8 @@ while i < length_text:
     elif text_modified[i].isdigit():
         words_number += 1
         i += 1
+    else:
+        i += 1
 
 print("Počet všech slov v textu je: {}".format(length_text))
 print("Počet slov s počátečním velkým písmenem je: {}".format(words_title))
