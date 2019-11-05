@@ -71,6 +71,7 @@ if user_check() == False:
 else:
     text_number = int(input("Vyberte jednu z možností textu a zadejte číslo 1 - 3: "))
 
+
 oddelovac()
 
 
@@ -78,13 +79,13 @@ oddelovac()
 text_lst = TEXTS[text_number-1].split(" ")
 text_modified = []
 
-for i in text_lst:
-    text_modified.append(i.strip("\n,."))
-
+for word in text_lst:
+    text_modified.append(word.strip(",.\n"))
 
 
 # celkovy pocet slov
 length_text = len(text_modified)
+
 
 i = 0
 while i < length_text:
