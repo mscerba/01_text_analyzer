@@ -28,66 +28,58 @@ in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
 
-uzivatel = {
-    'bob' : 123,
-    'ann' : 'pase123',
-    'mike' : 'password123',
-    'liz' : 'pass123'
+UZIVATEL = {
+    'bob': '123',
+    'ann': 'pase123',
+    'mike': 'password123',
+    'liz': 'pass123'
 }
 
-def oddelovac():
-    print("-" * 50)
 
-
-words_title = 0
-words_upper = 0
-words_lower = 0
-words_number = 0
+ODDELOVAC = "-" * 50
 
 
 # P1 Pozdrav uzivatele
-oddelovac()
+print(ODDELOVAC)
 print("Vítáme Tě v naši aplikaci, zadej přihlašovací údaje.")
 
 
-# P2 Pozadejte uzivatele o zadani uzivatelskeho hesla a jmena
-name = input("Uživatelské jméno: ")
-password = input("Heslo: ")
-oddelovac()
+# P2 Pozadejte uzivatele o zadani uzivatelskeho hesla a jmena + overeni
+swith = True
 
+while swith:
+    name = input("Uživatelské jméno: ")
+    password = input("Heslo: ")
 
-# P3 Zkontrolujte jestli uzivatelske jmeno a hesle patri mezi registrovane
-def user_check():
-    for name_user in uzivatel:
-        if name_user == name and str(uzivatel[name_user]) == password:
-            return True
-    return False
+    if name not in UZIVATEL.keys():
+        print("Zadali jste chybně jméno")
+    elif UZIVATEL[name] != password:
+        print('Zadali jste chybně heslo')
+    else:
+        text_number = int(input("Vyberte jednu z možností textu a zadejte číslo 1 - 3: "))
+        swith = False
 
-
-# P4 Pozadejte uzivatele, aby vybral text ze tri moznosti
-if user_check() == False:
-    print("Zadali jste chybně jméno nebo heslo.")
-    exit()
-else:
-    text_number = int(input("Vyberte jednu z možností textu a zadejte číslo 1 - 3: "))
-
-
-oddelovac()
+print(ODDELOVAC)
 
 
 # P5 Vypocitat statistiky pro vybrany text
-text_lst = TEXTS[text_number-1].split(" ")
+text_lst = TEXTS[text_number-1].split()
 text_modified = []
 
-for word in text_lst:
-    text_modified.append(word.strip(",.\n"))
+text_modified = [word.strip(",.\n") for word in text_lst]
+
 
 
 # celkovy pocet slov
 length_text = len(text_modified)
-
-
+words_title = 0
+words_upper = 0
+words_lower = 0
+words_number = 0
+length_words = []
+freq_words = {}
 i = 0
+
 while i < length_text:
     # pocet slov zacinajici velkym pismenem
     if text_modified[i].istitle():
@@ -108,42 +100,43 @@ while i < length_text:
     else:
         i += 1
 
-print("Počet všech slov v textu je: {}".format(length_text))
-print("Počet slov s počátečním velkým písmenem je: {}".format(words_title))
-print("Počet slov s velkými písmeny je: {}".format(words_upper))
-print("Počet slov s malými písmeny je: {}".format(words_lower))
-print("Počet slov pouze s čísly: {}".format(words_number))
+text_result = ['Počet všech slov v textu je: ',
+               'Počet slov s počátečním velkým písmenem je: ',
+               'Počet slov s velkými písmeny je: ',
+               'Počet slov s malými písmeny je: ',
+               'Počet slov pouze s čísly: ']
 
-oddelovac()
+text_value = [length_text, words_title, words_upper, words_lower, words_number]
+
+for index, text in enumerate(text_result):
+    print(text, text_value[index])
+
+print(ODDELOVAC)
 
 
 # P6 Vytvorte sloupcove grafy znazornujici cetnost delek slov
-length_words = []
-freq_words = {}
+suma_number_text = 0
 
 for word in text_modified:
     length_words.append(len(word))
+    if word.isdigit():
+        suma_number_text += int(word)
 
 length_words.sort()
-freq_words = dict.fromkeys(length_words,0)
+freq_words = dict.fromkeys(length_words, 0)
 
 for word in length_words:
     freq_words[word] = freq_words.get(word, 0) + 1
 
 for key in freq_words:
-    print(key, ':', '*' * freq_words[key], freq_words[key])
+    if key < 10:
+        key_str = '0' + str(key)
+    print(key_str, ':', '*' * freq_words[key], freq_words[key])
 
-oddelovac()
+print(ODDELOVAC)
 
-
-# P7 Vypocitejte soucet vsech ciselnych hodnot
-suma_number_text = 0
-
-for word in text_modified:
-    if word.isdigit():
-        suma_number_text += int(word)
+print(text_modified)
+print(length_words)
 
 
 print("Součet všech čísel v textu je: {}".format(suma_number_text))
-
-
